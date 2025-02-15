@@ -55,7 +55,7 @@ class Conta:
         except ValueError:
             print('Erro: Valor inválido para saque.')
 
-    def extrato(self):
+    def mostrar_extrato(self):
         print(f"\nExtrato da conta de {self.titular}")  
         print(f"Saldo atual: R$ {self.saldo:.2f}")   
         if self.extrato:
@@ -114,7 +114,7 @@ def ui():
                 titular = input("Digite o nome do titular: ").strip()
                 conta = buscar_conta(titular, contas)
                 if conta:
-                    conta.extrato()
+                    conta.mostrar_extrato()
                 else:
                     print("Erro: Conta não encontrada.")
 
@@ -125,6 +125,6 @@ def ui():
         except Exception as e:
             print(f"Erro: {e}")
 
-            
+
 if __name__ == "__main__":
     ui()

@@ -1,6 +1,6 @@
 Sistema Bancário 1.0
 
-Esse é um projeto simples de um Sistema Bancário desenvolvido em Python. O objetivo principal é praticar conceitos de POO (Programação Orientada a Objetos) e manipulação de entrada de dados.
+Esse é um projeto simples de um Sistema Bancário desenvolvido em Python como primeiro desafio do bootcamp Suzano Python Developer adicionei mais funcionalidades do que proposto no exercicio quis me testar ate aonde posso melhorar mas por enquanto, o objetivo principal foi  praticar conceitos de POO (Programação Orientada a Objetos) e manipulação de entrada de dados.
 
 🛠 Funcionalidades
 

@@ -64,7 +64,7 @@ class Conta:
         else:
             print("Nenhuma operação realizada ainda.")
 
-# Interface do usuário
+
 def buscar_conta(titular, contas):
     """ Busca uma conta pelo nome do titular. """
     for conta in contas:

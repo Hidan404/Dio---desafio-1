@@ -16,11 +16,11 @@ Consultar extrato bancário
 
 Clone o repositório:
 
-git clone https://github.com/Hidan404/sistema-bancario.git
+git clone https://github.com/Hidan404/Dio---desafio-1.git
 
 Acesse a pasta do projeto:
 
-cd sistema-bancario
+cd Dio---desafio-1
 
 Execute o script principal:
 

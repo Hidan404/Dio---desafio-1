@@ -22,7 +22,10 @@ class Conta:
         self.saques_realizados = 0 
         self.data = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
         
+    def atualizar_data(self):
+        self.data = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
+        
     def depositar(self, valor):
         try:
             valor = float(valor)

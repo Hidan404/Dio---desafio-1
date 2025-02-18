@@ -10,7 +10,7 @@ Com três métodos de operação:
 
 '''
 
-#todo: estabelecer limite de saques diários 10
+#todo: estabelecer limite de transacoes diários 10
 #todo: se o usuario tentar fazer mais de 10 transações diarias, exibir mensagem que limite diario foi atingido
 #todo: mostrar no extrato data e hora de todas transaçoes
 
@@ -20,15 +20,15 @@ class Conta:
         self.saldo = saldo
         self.extrato = []
         self.saques_realizados = 0 
-        self.data = datetime.date(datetime.now().strftime("%Y-%m-%d %H:%M"))
-        self.LIMITE_DIARIO = 10
+        self.data = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+        
 
     def depositar(self, valor):
         try:
             valor = float(valor)
             if valor > 0:
                 self.saldo += valor
-                self.extrato.append(f'Depósito: R$ {valor:.2f}')
+                self.extrato.append(f'Depósito: R$ {valor:.2f}, Data: {self.data}')
                 print(f'Depósito de R$ {valor:.2f} realizado com sucesso!')
             else:
                 print("O valor do depósito precisa ser positivo.")
@@ -37,6 +37,7 @@ class Conta:
 
     def sacar(self, valor):
         try:
+            
             LIMITE_SAQUES = 3
             SAQUE_MAXIMO = 500
 
@@ -56,7 +57,7 @@ class Conta:
 
             if valor > 0:
                 self.saldo -= valor
-                self.extrato.append(f'Saque: R$ {valor:.2f}')
+                self.extrato.append(f'Saque: R$ {valor:.2f}, Data: {self.data}')
                 self.saques_realizados += 1
                 print(f'Saque de R$ {valor:.2f} realizado com sucesso!')
             else:
@@ -74,6 +75,7 @@ class Conta:
         else:
             print("Nenhuma operação realizada ainda.")
 
+    
 
 def buscar_conta(titular, contas):
     """ Busca uma conta pelo nome do titular. """
@@ -82,11 +84,35 @@ def buscar_conta(titular, contas):
             return conta
     return None
 
+transacoes_diarias = 0
+ultima_transacao = datetime.today().date()
+
 def ui():
     contas = []
-
+    global transacoes_diarias, ultima_transacao
+    
     while True:
         try:
+            
+           
+           
+            
+
+
+            if datetime.today().date() != ultima_transacao:
+                ultima_transacao = datetime.today().date()
+                transacoes_diarias = 0
+                print("Limite diário de transações resetado.")
+
+            if transacoes_diarias >= 10:
+                print("Erro: Limite diário de transações atingido.")    
+                print("Deseja sair do sistema ou continuar?")
+                opcao = input("Digite 1 para sair ou 2 para continuar: ")
+                if opcao == "1":
+                    print("Saindo do sistema...")
+                    break
+                continue
+
             print("\n=== MENU ===")
             print("1. Criar conta")
             print("2. Depositar")
@@ -96,18 +122,25 @@ def ui():
             opcao = input("Escolha uma opção: ")
 
             if opcao == "1":
-                titular = input("Digite o nome do titular: ").strip()
-                saldo = float(input("Digite o saldo inicial: "))
-                nova_conta = Conta(titular, saldo)
-                contas.append(nova_conta)
-                print(f"Conta criada para {titular}!")
+                if transacoes_diarias >= 10:
+                    print("Erro: Limite diário de transações atingido.")
+                else:    
+                    titular = input("Digite o nome do titular: ").strip()
+                    saldo = float(input("Digite o saldo inicial: "))
+                    nova_conta = Conta(titular, saldo)
+                    contas.append(nova_conta)
+                    print(f"Conta criada para {titular}!")
+                    transacoes_diarias += 1
 
             elif opcao == "2":
+                if transacoes_diarias >= 10:
+                    print("Erro: Limite diário de transações atingido.")
                 titular = input("Digite o nome do titular: ").strip()
                 conta = buscar_conta(titular, contas)
                 if conta:
                     valor = input("Digite o valor do depósito: ")
                     conta.depositar(valor)
+                    transacoes_diarias += 1
                 else:
                     print("Erro: Conta não encontrada.")
 
@@ -117,6 +150,7 @@ def ui():
                 if conta:
                     valor = input("Digite o valor do saque: ")
                     conta.sacar(valor)
+                    transacoes_diarias += 1
                 else:
                     print("Erro: Conta não encontrada.")
 
@@ -125,12 +159,15 @@ def ui():
                 conta = buscar_conta(titular, contas)
                 if conta:
                     conta.mostrar_extrato()
+                    transacoes_diarias += 1
                 else:
                     print("Erro: Conta não encontrada.")
 
             elif opcao == "5":
                 print("Saindo do sistema...")      
                 break  
+
+            print(f"Transações diárias: {transacoes_diarias}")      
 
         except Exception as e:
             print(f"Erro: {e}")

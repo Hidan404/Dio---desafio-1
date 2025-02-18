@@ -94,11 +94,6 @@ def ui():
     while True:
         try:
             
-           
-           
-            
-
-
             if datetime.today().date() != ultima_transacao:
                 ultima_transacao = datetime.today().date()
                 transacoes_diarias = 0

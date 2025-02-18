@@ -25,12 +25,13 @@ class Conta:
     def atualizar_data(self):
         self.data = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
-        
+
     def depositar(self, valor):
         try:
             valor = float(valor)
             if valor > 0:
                 self.saldo += valor
+                self.atualizar_data()
                 self.extrato.append(f'Depósito: R$ {valor:.2f}, Data: {self.data}')
                 print(f'Depósito de R$ {valor:.2f} realizado com sucesso!')
             else:
@@ -60,6 +61,7 @@ class Conta:
 
             if valor > 0:
                 self.saldo -= valor
+                self.atualizar_data()
                 self.extrato.append(f'Saque: R$ {valor:.2f}, Data: {self.data}')
                 self.saques_realizados += 1
                 print(f'Saque de R$ {valor:.2f} realizado com sucesso!')

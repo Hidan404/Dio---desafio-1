@@ -1,10 +1,18 @@
+from datetime import datetime, time, timedelta, date
+
+
 '''
 Sistema Bancário - 1.0
 Com três métodos de operação:
 1. Depositar
 2. Sacar
 3. Extrato
+
 '''
+
+#todo: estabelecer limite de saques diários 10
+#todo: se o usuario tentar fazer mais de 10 transações diarias, exibir mensagem que limite diario foi atingido
+#todo: mostrar no extrato data e hora de todas transaçoes
 
 class Conta:
     def __init__(self, titular, saldo=0):
@@ -12,6 +20,8 @@ class Conta:
         self.saldo = saldo
         self.extrato = []
         self.saques_realizados = 0 
+        self.data = datetime.date(datetime.now().strftime("%Y-%m-%d %H:%M"))
+        self.LIMITE_DIARIO = 10
 
     def depositar(self, valor):
         try:

@@ -1,22 +1,22 @@
-Sistema Bancário 2.0
+# Sistema Bancário 1.0
+
 Esse é um projeto simples de um Sistema Bancário desenvolvido em Python como primeiro desafio do bootcamp Suzano Python Developer. Adicionei mais funcionalidades do que o proposto no exercício, quis me testar até onde posso melhorar, mas por enquanto, o objetivo principal foi praticar conceitos de POO (Programação Orientada a Objetos) e manipulação de entrada de dados.
 
-🛠 Funcionalidades
+🛠 **Funcionalidades**
 
-Criar conta bancária
-Realizar depósitos
-Realizar saques com limite diário
-Consultar extrato bancário
-Limite de 10 transações diárias por titular
-Bloqueio de transações quando o limite diário for atingido
-Data e hora registradas no extrato de todas as transações
-🚀 Como executar o projeto
+- Criar conta bancária
+- Realizar depósitos
+- Realizar saques com limite diário
+- Consultar extrato bancário
+- **Limite de 10 transações diárias por titular**
+- **Bloqueio de transações quando o limite diário for atingido**
+- **Data e hora registradas no extrato de todas as transações**
+
+🚀 **Como executar o projeto**
 
 Clone o repositório:
 
-bash
-Copiar
-Editar
+```bash
 git clone https://github.com/Hidan404/Dio---desafio-1.git
 Acesse a pasta do projeto:
 

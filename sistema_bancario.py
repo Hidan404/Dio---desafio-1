@@ -37,7 +37,7 @@ class Conta:
         self.data = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
     def atualizar_transacoes(self):
-        if len(self.transacoes) >= self.transacoes_limite:
+        if (self.transacoes) >= self.transacoes_limite:
             print(f"Erro: Limite diário de transações atingido para sua conta {self.usuario.nome}.")
             return False
 
@@ -53,6 +53,7 @@ class Conta:
             if valor > 0:
                 self.saldo += valor
                 self.atualizar_data()
+              
                 self.transacoes+= 1
                 self.extrato.append(f'Depósito: R$ {valor:.2f}, Data: {self.data}')
                 print(f'Depósito de R$ {valor:.2f} realizado com sucesso!')
@@ -105,16 +106,18 @@ class Conta:
     def mostrar_extrato(self):
         print(f"\nExtrato da conta de {self.usuario.titular}:")  
         print(f"Saldo atual: R$ {self.saldo:.2f}")   
-        if self.extrato:
-            for operacao in self.extrato:
-                print(operacao)
+        if self.transacoes:
+            for transacao in self.transacoes:
+                print(transacao)
         else:
             print("Nenhuma operação realizada ainda.")
 
     def listar_contas(contas):
         """ Lista todas as contas cadastradas. """
         for conta in contas:
-            print(f"Titular: {conta.usuario.titular}, Saldo: R$ {conta.usuario.saldo:.2f} CPF: {conta.usuario.cpf}")
+            print(f"Titular: {conta.usuario.titular}, Saldo: R$ {conta.saldo:.2f} CPF: {conta.usuario.cpf}")
+
+
 
     def buscar_conta(cpf, contas):
         """ Busca uma conta pelo nome do cpf. """
@@ -167,7 +170,8 @@ def ui():
             print("2. Depositar")
             print("3. Sacar")
             print("4. Extrato")
-            print("5. Sair")
+            print("5. Listar contas Cadastradas")
+            print("6. Sair")
             opcao = input("Escolha uma opção: ")
 
             if opcao == "1":
@@ -231,6 +235,9 @@ def ui():
                     print("Erro: Conta não encontrada.")
 
             elif opcao == "5":
+                print("Listando contas")
+                conta.listar_contas(contas)
+            elif opcao == "6":
                 print("Saindo do sistema...")      
                 break  
 

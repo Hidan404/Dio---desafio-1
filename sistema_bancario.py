@@ -113,7 +113,7 @@ class Conta:
         else:
             print("Nenhuma operação realizada ainda.")
 
-
+    @staticmethod
     def listar_contas(contas):
         """ Lista todas as contas cadastradas. """
         for conta in contas:
@@ -238,7 +238,7 @@ def ui():
 
             elif opcao == "5":
                 print("Listando contas")
-                conta.listar_contas(contas)
+                Conta.listar_contas(contas)
             elif opcao == "6":
                 print("Saindo do sistema...")      
                 break  

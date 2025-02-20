@@ -157,6 +157,10 @@ def ui():
                     data_nascimento = input("Digite a data de nascimento formato 00/00/0000: ")
                     cpf = input("Digite o CPF no formato 000.000.000-00: ").strip()
 
+                    if any(conta.usuario.cpf == cpf for conta in contas):
+                        print("Erro: Já existe uma conta com esse CPF.")
+                        continue
+
                     if not Conta.validar_data_nascimento(data_nascimento) or not Conta.validar_cpf(cpf):
                         print("Erro: Data de nascimento ou CPF inválidos.")
                         continue

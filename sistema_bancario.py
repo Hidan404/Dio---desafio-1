@@ -157,15 +157,16 @@ def ui():
                     data_nascimento = input("Digite a data de nascimento formato 00/00/0000: ")
                     cpf = input("Digite o CPF no formato 000.000.000-00: ").strip()
 
-                    if not validar_data_nascimento(data_nascimento) or not validar_cpf(cpf):
+                    if not Conta.validar_data_nascimento(data_nascimento) or not Conta.validar_cpf(cpf):
                         print("Erro: Data de nascimento ou CPF inválidos.")
                         continue
                         
                     endereco = input("Digite o endereço nesse formato: 'logradouro, numero, bairro, cidade, estado, cep': ") .split(',')   
 
 
-                    nova_conta = Conta( saldo)
-                    contas.append([nova_conta, titular, data_nascimento, cpf, endereco])
+                    Usuarios = Usuario(titular, data_nascimento, cpf, endereco)
+                    conta = Conta(Usuarios, saldo)
+                    
                     print(f"Conta criada para {titular}!")
                     transacoes_diarias += 1
 
@@ -173,7 +174,7 @@ def ui():
                 if transacoes_diarias >= 10:
                     print("Erro: Limite diário de transações atingido.")
                 titular = input("Digite o nome do titular: ").strip()
-                conta = buscar_conta(titular, contas)
+                conta = Conta.buscar_conta(titular, contas)
                 if conta:
                     valor = input("Digite o valor do depósito: ")
                     conta.depositar(valor)
@@ -183,7 +184,7 @@ def ui():
 
             elif opcao == "3":
                 titular = input("Digite o nome do titular: ").strip()
-                conta = buscar_conta(titular, contas)
+                conta = Conta.buscar_conta(titular, contas)
                 if conta:
                     valor = input("Digite o valor do saque: ")
                     conta.sacar(valor)
@@ -193,7 +194,7 @@ def ui():
 
             elif opcao == "4":
                 titular = input("Digite o nome do titular: ").strip()
-                conta = buscar_conta(titular, contas)
+                conta = Conta.buscar_conta(titular, contas)
                 if conta:
                     conta.mostrar_extrato()
                     transacoes_diarias += 1

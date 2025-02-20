@@ -144,7 +144,9 @@ def ui():
                 else:    
                     titular = input("Digite o nome do titular: ").strip()
                     saldo = float(input("Digite o saldo inicial: "))
+                    data_nascimento = input("Digite a data de nascimento formato 00/00/0000: ")
                     
+                    cpf = input("Digite o CPF: ")
 
                     nova_conta = Conta(titular, saldo)
                     contas.append(nova_conta)

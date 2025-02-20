@@ -40,6 +40,7 @@ class Conta:
         if (self.transacoes) >= self.transacoes_limite:
             print(f"Erro: Limite diário de transações atingido para sua conta {self.usuario.nome}.")
             return False
+        return True
 
     def atualizar_data(self):
         self.data = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
@@ -106,11 +107,12 @@ class Conta:
     def mostrar_extrato(self):
         print(f"\nExtrato da conta de {self.usuario.titular}:")  
         print(f"Saldo atual: R$ {self.saldo:.2f}")   
-        if self.transacoes:
-            for transacao in self.transacoes:
+        if self.extrato:
+            for transacao in self.extrato:  
                 print(transacao)
         else:
             print("Nenhuma operação realizada ainda.")
+
 
     def listar_contas(contas):
         """ Lista todas as contas cadastradas. """

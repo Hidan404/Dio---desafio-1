@@ -1,3 +1,5 @@
+# Criando o arquivo README.md com as informações estilizadas
+readme_content = """
 # Sistema Bancário 1.0
 
 Esse é um projeto simples de um Sistema Bancário desenvolvido em Python como primeiro desafio do bootcamp Suzano Python Developer. Adicionei mais funcionalidades do que o proposto no exercício, quis me testar até onde posso melhorar, mas por enquanto, o objetivo principal foi praticar conceitos de POO (Programação Orientada a Objetos) e manipulação de entrada de dados.
@@ -24,15 +26,14 @@ Esse é um projeto simples de um Sistema Bancário desenvolvido em Python como p
 
 ```bash
 git clone https://github.com/Hidan404/Dio---desafio-1.git
-Acesse a pasta do projeto:
-bash
-Copiar
-Editar
+
+
 cd Dio---desafio-1
 Execute o script principal:
 bash
+Sempre exibir os detalhes
+
 Copiar
-Editar
 python sistema_bancario.py
 📝 Como funciona?
 O sistema é baseado na classe Conta, que representa uma conta bancária com os seguintes métodos:

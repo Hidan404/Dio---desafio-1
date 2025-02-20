@@ -17,29 +17,23 @@ Com três métodos de operação:
 #todo: armazenar usuarios com nome, data de nascimento, cpf, endereco no formato logradouro, numero, bairro, cidade, estado, cep
 #todo: não podemos ter mais de uma conta com o mesmo cpf
 
+class Usuario():
+    def __init__(self,titular, data_nascimento, cpf, endereco):
+        self.titular = titular
+        self.data_nascimento = data_nascimento
+        self.cpf = cpf
+        self.endereco = endereco
+
+
+
 class Conta:
-    def __init__(self, saldo=0):
-        self.lista_usuarios = []
+    def __init__(self, usuario, saldo=0):
+        self.usuario = usuario
         self.saldo = saldo
         self.extrato = []
         self.saques_realizados = 0 
         self.data = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
-    def usuario(self, nome, data_nascimento, cpf, *endereco):
-        for usuario in self.lista_usuarios:
-            if cpf == usuario['cpf']:
-                print("Erro: Já existe um usuário com este CPF.")
-                return
-        self.lista_usuarios.append({'nome': nome, 'data_nascimento': data_nascimento, 'cpf': cpf, 'endereco': []})    
-        for item in endereco:
-            self.lista_usuarios[-1]['endereco'].append({
-                'logradouro': item[0],
-                'numero': item[1],
-                'bairro': item[2],
-                'cidade': item[3],
-                'estado': item[4],
-                'cep': item[5]
-            })
 
     def atualizar_data(self):
         self.data = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
@@ -100,10 +94,10 @@ class Conta:
 
     
 
-def buscar_conta(titular, contas):
-    """ Busca uma conta pelo nome do titular. """
+def buscar_conta(cpf, contas):
+    """ Busca uma conta pelo nome do cpf. """
     for conta in contas:
-        if conta.titular == titular:
+        if conta.Usuario.cpf == cpf:
             return conta
     return None
 
@@ -112,15 +106,15 @@ def validar_data_nascimento(data_nascimento):
        datetime.strptime(data_nascimento, "%d/%m/%Y")
        return True
    except Exception as e:
-       print(f"Erro: {e}")
+       return False
 
 def validar_cpf(cpf):
     try:
         regex_cpf = re.compile(r'^\d{3}\.\d{3}\.\d{3}-\d{2}$')
         if regex_cpf.match(cpf):
             return True  
-    except Exception as e:
-        print(f"Erro: {e}")         
+    except:
+        return False       
 
 transacoes_diarias = 0
 ultima_transacao = datetime.today().date()

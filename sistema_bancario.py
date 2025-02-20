@@ -13,18 +13,35 @@ Com três métodos de operação:
 #todo: estabelecer limite de transacoes diários 10
 #todo: se o usuario tentar fazer mais de 10 transações diarias, exibir mensagem que limite diario foi atingido
 #todo: mostrar no extrato data e hora de todas transaçoes
+#todo: armazenar usuarios com nome, data de nascimento, cpf, endereco no formato logradouro, numero, bairro, cidade, estado, cep
+#todo: não podemos ter mais de uma conta com o mesmo cpf
 
 class Conta:
-    def __init__(self, titular, saldo=0):
-        self.titular = titular
+    def __init__(self, saldo=0):
+        self.lista_usuarios = []
         self.saldo = saldo
         self.extrato = []
         self.saques_realizados = 0 
         self.data = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-        
+
+    def usuario(self, nome, data_nascimento, cpf, *endereco):
+        for usuario in self.lista_usuarios:
+            if cpf == usuario['cpf']:
+                print("Erro: Já existe um usuário com este CPF.")
+                return
+        self.lista_usuarios.append({'nome': nome, 'data_nascimento': data_nascimento, 'cpf': cpf, 'endereco': []})    
+        for item in endereco:
+            self.lista_usuarios[-1]['endereco'].append({
+                'logradouro': item[0],
+                'numero': item[1],
+                'bairro': item[2],
+                'cidade': item[3],
+                'estado': item[4],
+                'cep': item[5]
+            })
+
     def atualizar_data(self):
         self.data = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-
 
     def depositar(self, valor):
         try:
@@ -127,6 +144,8 @@ def ui():
                 else:    
                     titular = input("Digite o nome do titular: ").strip()
                     saldo = float(input("Digite o saldo inicial: "))
+                    
+
                     nova_conta = Conta(titular, saldo)
                     contas.append(nova_conta)
                     print(f"Conta criada para {titular}!")

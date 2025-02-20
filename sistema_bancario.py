@@ -1,4 +1,5 @@
 from datetime import datetime, time, timedelta, date
+import re
 
 
 '''
@@ -106,6 +107,21 @@ def buscar_conta(titular, contas):
             return conta
     return None
 
+def validar_data_nascimento(data_nascimento):
+   try:
+       datetime.strptime(data_nascimento, "%d/%m/%Y")
+       return True
+   except Exception as e:
+       print(f"Erro: {e}")
+
+def validar_cpf(cpf):
+    try:
+        regex_cpf = re.compile(r'^\d{3}\.\d{3}\.\d{3}-\d{2}$')
+        if regex_cpf.match(cpf):
+            return True  
+    except Exception as e:
+        print(f"Erro: {e}")         
+
 transacoes_diarias = 0
 ultima_transacao = datetime.today().date()
 
@@ -145,11 +161,16 @@ def ui():
                     titular = input("Digite o nome do titular: ").strip()
                     saldo = float(input("Digite o saldo inicial: "))
                     data_nascimento = input("Digite a data de nascimento formato 00/00/0000: ")
-                    
+                    if validar_data_nascimento(data_nascimento):
+                        print("Data de nascimento válida.")
                     cpf = input("Digite o CPF: ")
+                    if validar_cpf(cpf):
+                        print("cpf valido")
+                    endereco = input("Digite o endereço nesse formato: 'logradouro, numero, bairro, cidade, estado, cep': ") .split(',')   
 
-                    nova_conta = Conta(titular, saldo)
-                    contas.append(nova_conta)
+
+                    nova_conta = Conta( saldo)
+                    contas.append([nova_conta, titular, data_nascimento, cpf, endereco])
                     print(f"Conta criada para {titular}!")
                     transacoes_diarias += 1
 

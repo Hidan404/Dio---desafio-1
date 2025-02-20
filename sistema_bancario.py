@@ -84,7 +84,7 @@ class Conta:
             print('Erro: Valor inválido para saque.')
 
     def mostrar_extrato(self):
-        print(f"\nExtrato da conta de {self.titular}")  
+        print(f"\nExtrato da conta de {self.usuario.titular}:")  
         print(f"Saldo atual: R$ {self.saldo:.2f}")   
         if self.extrato:
             for operacao in self.extrato:
@@ -97,7 +97,7 @@ class Conta:
     def buscar_conta(cpf, contas):
         """ Busca uma conta pelo nome do cpf. """
         for conta in contas:
-            if conta.Usuario.cpf == cpf:
+            if conta.usuario.cpf == cpf:
                 return conta
         return None
 
@@ -164,8 +164,9 @@ def ui():
                     endereco = input("Digite o endereço nesse formato: 'logradouro, numero, bairro, cidade, estado, cep': ") .split(',')   
 
 
-                    Usuarios = Usuario(titular, data_nascimento, cpf, endereco)
-                    conta = Conta(Usuarios, saldo)
+                    usuarios = Usuario(titular, data_nascimento, cpf, endereco)
+                    conta = Conta(usuarios, saldo)
+                    contas.append(conta)
                     
                     print(f"Conta criada para {titular}!")
                     transacoes_diarias += 1
@@ -173,8 +174,10 @@ def ui():
             elif opcao == "2":
                 if transacoes_diarias >= 10:
                     print("Erro: Limite diário de transações atingido.")
-                titular = input("Digite o nome do titular: ").strip()
-                conta = Conta.buscar_conta(titular, contas)
+
+                cpf = input("Digite seu cpf do titular: ").strip()
+                conta = Conta.buscar_conta(cpf, contas)
+                
                 if conta:
                     valor = input("Digite o valor do depósito: ")
                     conta.depositar(valor)
@@ -183,8 +186,8 @@ def ui():
                     print("Erro: Conta não encontrada.")
 
             elif opcao == "3":
-                titular = input("Digite o nome do titular: ").strip()
-                conta = Conta.buscar_conta(titular, contas)
+                cpf = input("Digite seu cpf do titular: ").strip()
+                conta = Conta.buscar_conta(cpf, contas)
                 if conta:
                     valor = input("Digite o valor do saque: ")
                     conta.sacar(valor)
@@ -193,8 +196,8 @@ def ui():
                     print("Erro: Conta não encontrada.")
 
             elif opcao == "4":
-                titular = input("Digite o nome do titular: ").strip()
-                conta = Conta.buscar_conta(titular, contas)
+                cpf = input("Digite o numero do cpf da conta: ").strip()
+                conta = Conta.buscar_conta(cpf, contas)
                 if conta:
                     conta.mostrar_extrato()
                     transacoes_diarias += 1

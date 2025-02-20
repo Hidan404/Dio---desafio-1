@@ -32,6 +32,7 @@ class Conta:
         self.saldo = saldo
         self.extrato = []
         self.saques_realizados = 0 
+        self.transacoes_limite = 10
         self.data = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
 

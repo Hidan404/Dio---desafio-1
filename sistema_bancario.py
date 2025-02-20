@@ -94,27 +94,27 @@ class Conta:
 
     
 
-def buscar_conta(cpf, contas):
-    """ Busca uma conta pelo nome do cpf. """
-    for conta in contas:
-        if conta.Usuario.cpf == cpf:
-            return conta
-    return None
+    def buscar_conta(cpf, contas):
+        """ Busca uma conta pelo nome do cpf. """
+        for conta in contas:
+            if conta.Usuario.cpf == cpf:
+                return conta
+        return None
 
-def validar_data_nascimento(data_nascimento):
-   try:
-       datetime.strptime(data_nascimento, "%d/%m/%Y")
-       return True
-   except Exception as e:
-       return False
+    def validar_data_nascimento(data_nascimento):
+        try:
+            datetime.strptime(data_nascimento, "%d/%m/%Y")
+            return True
+        except Exception as e:
+            return False
 
-def validar_cpf(cpf):
-    try:
-        regex_cpf = re.compile(r'^\d{3}\.\d{3}\.\d{3}-\d{2}$')
-        if regex_cpf.match(cpf):
-            return True  
-    except:
-        return False       
+    def validar_cpf(cpf):
+        try:
+            regex_cpf = re.compile(r'^\d{3}\.\d{3}\.\d{3}-\d{2}$')
+            if regex_cpf.match(cpf):
+                return True  
+        except:
+            return False       
 
 transacoes_diarias = 0
 ultima_transacao = datetime.today().date()
@@ -155,11 +155,12 @@ def ui():
                     titular = input("Digite o nome do titular: ").strip()
                     saldo = float(input("Digite o saldo inicial: "))
                     data_nascimento = input("Digite a data de nascimento formato 00/00/0000: ")
-                    if validar_data_nascimento(data_nascimento):
-                        print("Data de nascimento válida.")
-                    cpf = input("Digite o CPF: ")
-                    if validar_cpf(cpf):
-                        print("cpf valido")
+                    cpf = input("Digite o CPF no formato 000.000.000-00: ").strip()
+
+                    if not validar_data_nascimento(data_nascimento) or not validar_cpf(cpf):
+                        print("Erro: Data de nascimento ou CPF inválidos.")
+                        continue
+                        
                     endereco = input("Digite o endereço nesse formato: 'logradouro, numero, bairro, cidade, estado, cep': ") .split(',')   
 
 

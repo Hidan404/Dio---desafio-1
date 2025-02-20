@@ -32,19 +32,28 @@ class Conta:
         self.saldo = saldo
         self.extrato = []
         self.saques_realizados = 0 
+        self.transacoes = 0
         self.transacoes_limite = 10
         self.data = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
+    def atualizar_transacoes(self):
+        if len(self.transacoes) >= self.transacoes_limite:
+            print(f"Erro: Limite diário de transações atingido para sua conta {self.usuario.nome}.")
+            return False
 
     def atualizar_data(self):
         self.data = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
     def depositar(self, valor):
+        if not self.atualizar_transacoes():
+            return False
+
         try:
             valor = float(valor)
             if valor > 0:
                 self.saldo += valor
                 self.atualizar_data()
+                self.transacoes+= 1
                 self.extrato.append(f'Depósito: R$ {valor:.2f}, Data: {self.data}')
                 print(f'Depósito de R$ {valor:.2f} realizado com sucesso!')
             else:
@@ -53,6 +62,10 @@ class Conta:
             print('Erro: Valor inválido para depósito.')
 
     def sacar(self, valor):
+
+        if not self.atualizar_transacoes():
+            return False
+        
         try:
             
             LIMITE_SAQUES = 3
@@ -67,6 +80,10 @@ class Conta:
             if valor > self.saldo:
                 print(f"Erro: Saldo insuficiente Saldo atual de: R$ {self.saldo:.2f}")
                 return
+            
+            if valor < 0:
+                print("Erro: O valor do saque deve ser positivo.")
+                return
 
             if valor > SAQUE_MAXIMO:
                 print(f"Erro: O valor máximo para saque é de R$ {SAQUE_MAXIMO:.2f} por operação.")
@@ -75,6 +92,7 @@ class Conta:
             if valor > 0:
                 self.saldo -= valor
                 self.atualizar_data()
+                self.transacoes+= 1
                 self.extrato.append(f'Saque: R$ {valor:.2f}, Data: {self.data}')
                 self.saques_realizados += 1
                 print(f'Saque de R$ {valor:.2f} realizado com sucesso!')
@@ -93,7 +111,10 @@ class Conta:
         else:
             print("Nenhuma operação realizada ainda.")
 
-    
+    def listar_contas(contas):
+        """ Lista todas as contas cadastradas. """
+        for conta in contas:
+            print(f"Titular: {conta.usuario.titular}, Saldo: R$ {conta.usuario.saldo:.2f} CPF: {conta.usuario.cpf}")
 
     def buscar_conta(cpf, contas):
         """ Busca uma conta pelo nome do cpf. """

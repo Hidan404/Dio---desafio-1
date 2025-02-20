@@ -1,5 +1,3 @@
-# Criando o arquivo README.md com as informações estilizadas
-readme_content = """
 # Sistema Bancário 1.0
 
 Esse é um projeto simples de um Sistema Bancário desenvolvido em Python como primeiro desafio do bootcamp Suzano Python Developer. Adicionei mais funcionalidades do que o proposto no exercício, quis me testar até onde posso melhorar, mas por enquanto, o objetivo principal foi praticar conceitos de POO (Programação Orientada a Objetos) e manipulação de entrada de dados.
@@ -24,37 +22,48 @@ Esse é um projeto simples de um Sistema Bancário desenvolvido em Python como p
 
 1. Clone o repositório:
 
-```bash
-git clone https://github.com/Hidan404/Dio---desafio-1.git
+    ```bash
+    git clone https://github.com/Hidan404/Dio---desafio-1.git
+    ```
 
+2. Acesse o diretório do projeto:
 
-cd Dio---desafio-1
-Execute o script principal:
-bash
-Sempre exibir os detalhes
+    ```bash
+    cd Dio---desafio-1
+    ```
 
-Copiar
-python sistema_bancario.py
-📝 Como funciona?
-O sistema é baseado na classe Conta, que representa uma conta bancária com os seguintes métodos:
+3. Execute o script principal:
 
-depositar(valor): Adiciona saldo à conta.
-sacar(valor): Realiza saques respeitando o limite diário de transações.
-mostrar_extrato(): Exibe o saldo e o histórico de operações da conta, com data e hora de cada transação.
-atualizar_transacoes(): Atualiza a quantidade de transações feitas no dia.
-atualizar_data(): Reseta o contador de transações diárias no início de cada dia.
-listar_contas(): Lista todas as contas cadastradas no sistema.
-buscar_conta(cpf): Busca uma conta específica pelo CPF do titular.
-validar_data_nascimento(data): Valida se a data de nascimento fornecida está no formato correto.
-validar_cpf(cpf): Valida se o CPF fornecido é válido de acordo com as regras de formatação.
-A interface do usuário (função ui()) apresenta um menu interativo no terminal, permitindo ao usuário interagir com o sistema.
+    ```bash
+    python sistema_bancario.py
+    ```
 
-⚙ Requisitos
-Python 3.x instalado.
-🔗 Melhorias futuras
-Implementar persistência de dados (salvar contas em um arquivo JSON ou banco de dados).
-Criar uma interface gráfica.
-Adicionar autenticação de usuário.
+## 📝 Como funciona?
+
+O sistema é baseado na classe `Conta`, que representa uma conta bancária com os seguintes métodos:
+
+- **`depositar(valor)`**: Adiciona saldo à conta.
+- **`sacar(valor)`**: Realiza saques respeitando o limite diário de transações.
+- **`mostrar_extrato()`**: Exibe o saldo e o histórico de operações da conta, com data e hora de cada transação.
+- **`atualizar_transacoes()`**: Atualiza a quantidade de transações feitas no dia.
+- **`atualizar_data()`**: Reseta o contador de transações diárias no início de cada dia.
+- **`listar_contas()`**: Lista todas as contas cadastradas no sistema.
+- **`buscar_conta(cpf)`**: Busca uma conta específica pelo CPF do titular.
+- **`validar_data_nascimento(data)`**: Valida se a data de nascimento fornecida está no formato correto.
+- **`validar_cpf(cpf)`**: Valida se o CPF fornecido é válido de acordo com as regras de formatação.
+
+A interface do usuário (função `ui()`) apresenta um menu interativo no terminal, permitindo ao usuário interagir com o sistema.
+
+## ⚙ Requisitos
+
+- Python 3.x instalado.
+
+## 🔗 Melhorias futuras
+
+- Implementar persistência de dados (salvar contas em um arquivo JSON ou banco de dados).
+- Criar uma interface gráfica.
+- Adicionar autenticação de usuário.
+
 Se quiser contribuir, fique à vontade! 😃
 
 📌 Autor: Ronald (Hidan404)

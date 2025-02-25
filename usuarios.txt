@@ -1,0 +1,1 @@
+Titular: Ronald, Data de Nascimento: 05/10/1994, CPF: 030.586.752-08, Endereço: ['caracas', ' 1219', ' novo', ' parauapebas', ' para', ' 685150-00']

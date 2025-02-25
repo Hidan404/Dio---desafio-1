@@ -1,4 +1,4 @@
-from model import Conta, Usuario
+from model import Conta, Usuario, salvar_usuario_em_arquivo
 from datetime import datetime
 
 
@@ -32,7 +32,8 @@ def ui():
             print("3. Sacar")
             print("4. Extrato")
             print("5. Listar contas Cadastradas")
-            print("6. Sair")
+            print("6. Salvar conta do usuario em arquivo")
+            print("7. Sair")
             opcao = input("Escolha uma opção: ")
 
             if opcao == "1":
@@ -99,6 +100,14 @@ def ui():
                 print("Listando contas")
                 Conta.listar_contas(contas)
             elif opcao == "6":
+                cpf = input("Digite o CPF do titular: ").strip()
+                conta = Conta.buscar_conta(cpf, contas)
+                if conta:
+                    salvar_usuario_em_arquivo(conta.usuario)
+                    print("Conta salva em arquivo com sucesso.")
+                else:
+                    print("Erro: Conta não encontrada.")
+            elif opcao == "7":
                 print("Saindo do sistema...")      
                 break  
 

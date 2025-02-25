@@ -11,7 +11,13 @@ class Usuario():
 
 class salvar_usuario_em_arquivo():
     def __init__(self, usuario, usuarios = "usuarios.txt"):
-        self.
+        self.usuario = usuario
+        self.usuario = usuarios
+
+        with open(usuarios, "a") as file:
+            file.write(f"Titular: {usuario.titular}, Data de Nascimento: {usuario.data_nascimento}, CPF: {usuario.cpf}, Endereço: {usuario.endereco}\n")
+            print(f"Usuário {usuario.titular} salvo com sucesso!")
+        
 
 class Conta:
     def __init__(self, usuario, saldo=0, agencia = "0001"):

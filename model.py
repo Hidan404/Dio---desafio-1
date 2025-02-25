@@ -1,5 +1,6 @@
 from datetime import datetime
 import re
+import os
 
 
 class Usuario():
@@ -14,9 +15,17 @@ class salvar_usuario_em_arquivo():
         self.usuario = usuario
         self.usuario = usuarios
 
+        if os.name == 'posix':
+            usuarios = "/home/hidan/Documentos/GitHub/Dio---desafio-1/usuarios.txt"
+        elif os.name == 'nt':
+            usuarios = "C:\\Users\\hidan\\Documents\\GitHub\\Dio---desafio-1\\usuarios.txt"
+        else:
+            print("Sistema operacional não suportado.")
+            return
+
         with open(usuarios, "a") as file:
-            file.write(f"Titular: {usuario.titular}, Data de Nascimento: {usuario.data_nascimento}, CPF: {usuario.cpf}, Endereço: {usuario.endereco}\n")
-            print(f"Usuário {usuario.titular} salvo com sucesso!")
+            file.write(f"Titular: {self.usuario.titular}, Data de Nascimento: {self.usuario.data_nascimento}, CPF: {self.usuario.cpf}, Endereço: {self.usuario.endereco}\n")
+            print(f"Usuário {self.usuario.titular} salvo com sucesso!")
         
 
 class Conta:

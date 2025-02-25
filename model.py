@@ -9,6 +9,10 @@ class Usuario():
         self.cpf = cpf
         self.endereco = endereco
 
+class salvar_usuario_em_arquivo():
+    def __init__(self, usuario, usuarios = "usuarios.txt"):
+        self.
+
 class Conta:
     def __init__(self, usuario, saldo=0, agencia = "0001"):
         self.usuario = usuario

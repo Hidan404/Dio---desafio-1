@@ -1,4 +1,4 @@
-from model import Conta, Usuario, salvar_usuario_em_arquivo
+from model import Conta, Usuario, salvar_usuario_em_arquivo, visualizar_arquivo_usuarios
 from datetime import datetime
 
 

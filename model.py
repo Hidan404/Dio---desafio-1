@@ -28,6 +28,26 @@ class salvar_usuario_em_arquivo():
             print(f"Usuário {self.usuario.titular} salvo com sucesso!")
         
 
+class visualizar_arquivo_usuarios():
+    def __init__(self, arquivo="usuarios.txt"):
+        self.arquivo = arquivo
+
+        if os.name == 'posix':
+            self.arquivo = "/home/hidan/Documentos/GitHub/Dio---desafio-1/usuarios.txt"
+        elif os.name == 'nt':
+            self.arquivo = "C:\\Users\\hidan\\Documents\\GitHub\\Dio---desafio-1\\usuarios.txt"
+        else:
+            print("Sistema operacional não suportado.")
+            return
+
+    def visualizar(self):
+        try:
+            with open(self.arquivo, "r") as file:
+                print(file.read())
+        except FileNotFoundError:
+            print("Erro: Arquivo não encontrado.")
+
+
 class Conta:
     def __init__(self, usuario, saldo=0, agencia = "0001"):
         self.usuario = usuario

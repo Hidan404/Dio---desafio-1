@@ -1,6 +1,11 @@
 from datetime import datetime
 import re
 import os
+from functools import wraps
+
+
+
+        
 
 
 class Usuario():
@@ -127,21 +132,39 @@ class Conta:
         except ValueError:
             print('Erro: Valor inválido para saque.')
 
+    def mostrar_extrato_decorador_log(funcao):
+        @wraps(funcao)
+        def wrapper(self, *args, **kwargs):
+            print(f"\n[LOG] Chamando extrato para {self.usuario.titular} em {datetime.now().strftime('%d/%m/%Y %H:%M:%S')}")
+            return funcao(self, *args, **kwargs)
+        return wrapper
+    
+    @mostrar_extrato_decorador_log
     def mostrar_extrato(self):
-        print(f"\nExtrato da conta de {self.usuario.titular}:")  
-        print(f"Saldo atual: R$ {self.saldo:.2f}")   
-        if self.extrato:
-            for transacao in self.extrato:  
-                print(transacao)
-        else:
-            print("Nenhuma operação realizada ainda.")
+        """ Exibe o extrato da conta. """
+        if not self.extrato:
+            print("Extrato vazio.")
+            return
+        
+        print(f"\nExtrato da conta de {self.usuario.titular} - Saldo: R$ {self.saldo:.2f}")
+        print("Data e Hora: ", self.data)
+        print("Transações:")
+        for transacao in self.extrato:
+            print(transacao)
+
+    """@staticmethod
+    def listar_contas(contas):
+        
+        for conta in contas:
+            print(f"Titular: {conta.usuario.titular}, Saldo: R$ {conta.saldo:.2f} CPF: {conta.usuario.cpf}")
+            print(f"{conta}")
+            """
 
     @staticmethod
     def listar_contas(contas):
-        """ Lista todas as contas cadastradas. """
         for conta in contas:
-            print(f"Titular: {conta.usuario.titular}, Saldo: R$ {conta.saldo:.2f} CPF: {conta.usuario.cpf}")
-
+            yield f"Titular: {conta.usuario.titular}, Saldo: R$ {conta.saldo:.2f}, CPF: {conta.usuario.cpf}, Agência: {conta.agencia}"
+        return "Nenhuma conta cadastrada."
 
     @staticmethod
     def buscar_conta(cpf, contas):

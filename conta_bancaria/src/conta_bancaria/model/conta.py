@@ -63,7 +63,7 @@ class Conta:
             print("Nenhuma conta cadastrada.")
             return
         for conta in contas:
-            print(f"Titular: {conta.usuario.titular}, Saldo: R$ {conta.saldo:.2f}, CPF: {conta.usuario.cpf}")
+            print(f"Titular: {conta.usuario.titular}, Saldo: R$ {conta.saldo:.2f}, CPF: {conta.usuario.cpf} Data visualização: {conta.data}")
 
     @staticmethod
     def buscar_conta(cpf, contas):

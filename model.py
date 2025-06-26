@@ -16,19 +16,19 @@ class Usuario():
         self.endereco = endereco
 
 class salvar_usuario_em_arquivo():
-    def __init__(self, usuario, usuarios = "usuarios.txt"):
+    def __init__(self, usuario, arquivos = "usuarios.txt"):
         self.usuario = usuario
-        self.usuario = usuarios
+        
 
         if os.name == 'posix':
-            usuarios = "/home/hidan/Documentos/GitHub/Dio---desafio-1/usuarios.txt"
+            arquivos = "/home/hidan/Documentos/GitHub/Dio---desafio-1/usuarios.txt"
         elif os.name == 'nt':
-            usuarios = "C:\\Users\\hidan\\Documents\\GitHub\\Dio---desafio-1\\usuarios.txt"
+            arquivos = "C:\\Users\\hidan\\Documents\\GitHub\\Dio---desafio-1\\usuarios.txt"
         else:
             print("Sistema operacional não suportado.")
             return
 
-        with open(usuarios, "a") as file:
+        with open(arquivos, "a") as file:
             file.write(f"Titular: {self.usuario.titular}, Data de Nascimento: {self.usuario.data_nascimento}, CPF: {self.usuario.cpf}, Endereço: {self.usuario.endereco}\n")
             print(f"Usuário {self.usuario.titular} salvo com sucesso!")
         
@@ -162,9 +162,11 @@ class Conta:
 
     @staticmethod
     def listar_contas(contas):
+        if not contas:
+            print("Nenhuma conta cadastrada.")
+            return
         for conta in contas:
-            yield f"Titular: {conta.usuario.titular}, Saldo: R$ {conta.saldo:.2f}, CPF: {conta.usuario.cpf}, Agência: {conta.agencia}"
-        return "Nenhuma conta cadastrada."
+            print(f"Titular: {conta.usuario.titular}, Saldo: R$ {conta.saldo:.2f}, CPF: {conta.usuario.cpf}, Agência: {conta.agencia}")
 
     @staticmethod
     def buscar_conta(cpf, contas):

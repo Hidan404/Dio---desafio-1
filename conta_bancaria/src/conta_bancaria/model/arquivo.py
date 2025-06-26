@@ -1,8 +1,11 @@
 import os
+def caminho_padrao():
+    ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+    return ROOT_DIR
 
 def salvar_usuario_em_arquivo(usuario):
     if os.name == 'posix':
-        caminho = "/home/hidan/Documentos/GitHub/Dio---desafio-1/usuarios.txt"
+        caminho = f"{caminho_padrao()}/usuarios.txt"
     elif os.name == 'nt':
         caminho = "C:\\Users\\hidan\\Documents\\GitHub\\Dio---desafio-1\\usuarios.txt"
     else:
